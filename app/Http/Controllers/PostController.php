@@ -14,7 +14,8 @@ class PostController extends Controller
     public function index()
     {
 
-        $p
+        $post = Post::with('user')->get();
+            return view('index', compact('post'));
 
 
     }
