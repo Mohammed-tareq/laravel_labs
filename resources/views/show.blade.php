@@ -11,11 +11,11 @@
                 <div class="space-y-2">
                     <div>
                         <span class="font-medium text-gray-700">Title:</span>
-                        <span class="text-gray-900">{{ $post['title'] }}</span>
+                        <span class="text-gray-900">{{ $post->title }}</span>
                     </div>
                     <div>
                         <span class="font-medium text-gray-700">Description:</span>
-                        <p class="text-gray-700">{{ $post['description'] }}</p>
+                        <p class="text-gray-700">{{ $post->description }}</p>
                     </div>
                 </div>
             </section>
@@ -28,15 +28,15 @@
                 <div class="space-y-2">
                     <div>
                         <span class="font-medium text-gray-700">Name:</span>
-                        <span class="text-gray-900">{{ $post['author'] }}</span>
+                        <span class="text-gray-900">{{ $post->user->name }}</span>
                     </div>
                     <div>
                         <span class="font-medium text-gray-700">Email:</span>
-                        <span class="text-gray-900">{{ $post['email'] }}</span>
+                        <span class="text-gray-900">{{ $post->user->email }}</span>
                     </div>
                     <div>
                         <span class="font-medium text-gray-700">Created At:</span>
-                        <span class="text-gray-900">{{ $post['created_at']  }}</span>
+                        <span class="text-gray-900">{{ $post->created_at->diffForHumans() }}</span>
                     </div>
                 </div>
 
