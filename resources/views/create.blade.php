@@ -24,17 +24,13 @@
 
                 <div>
                     <label for="creator" class="block text-sm font-medium text-gray-700 mb-1">Post Creator</label>
-                    <select id="creator" name="author"
-                            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
-                        <option value="Ahmed">Ahmed</option>
-                        <option value="Mohammed">Mohammed</option>
-                        <option value="Ali">Ali</option>
-                        <option value="salem">salem</option>
-                        <option value="tareq">tareq</option>
-                        <option value="fofaa">fofaa</option>
+                    <select id="creator" name="user_id"
+                        class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition">
+                        @foreach ($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endforeach
                     </select>
                 </div>
-
                 <!-- Submit -->
                 <div class="pt-2">
                     <button type="submit"

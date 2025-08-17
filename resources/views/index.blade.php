@@ -26,15 +26,15 @@
             <tbody class="divide-y divide-gray-200">
             @foreach ($posts as $post)
             <tr>
-                <td class="px-6 py-4">{{$post["id"]}}</td>
-                <td class="px-6 py-4 font-medium">{{$post["title"]}}</td>
-                <td class="px-6 py-4">{{$post["author"]}}</td>
-                <td class="px-6 py-4">{{$post["created_at"]}}</td>
+                <td class="px-6 py-4">{{$post->id}}</td>
+                <td class="px-6 py-4 font-medium">{{$post->title}}</td>
+                <td class="px-6 py-4">{{$post->user->name}}</td>
+                <td class="px-6 py-4">{{$post->created_at->diffForHumans()}}</td>
                 <td class="px-6 py-4 text-right space-x-2">
                     <div class="flex items-center space-x-2">
-                        <a href="{{ route('posts.show', $post['id']) }}" class="px-3 py-1 text-sm bg-green-100 text-green-700 rounded hover:bg-green-200">View</a>
-                        <a href="{{ route('posts.edit', $post['id']) }}" class="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded hover:bg-blue-200">Edit</a>
-                        <form action="{{ route('posts.destroy', $post['id']) }}" method="POST" style="display:inline;">
+                        <a href="{{ route('posts.show', $post->id) }}" class="px-3 py-1 text-sm bg-green-100 text-green-700 rounded hover:bg-green-200">View</a>
+                        <a href="{{ route('posts.edit', $post->id) }}" class="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded hover:bg-blue-200">Edit</a>
+                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200">Delete</button>
@@ -50,13 +50,9 @@
 
     <!-- Pagination -->
     <div class="flex justify-between items-center mt-4">
-        <a href="#" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">Previous</a>
         <div class="space-x-1">
-            <a href="#" class="px-3 py-1 bg-indigo-600 text-white rounded">1</a>
-            <a href="#" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">2</a>
-            <a href="#" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">3</a>
+            <a href="#" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">{{ $posts->links() }}</a>
         </div>
-        <a href="#" class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">Next</a>
     </div>
 
 </main>
