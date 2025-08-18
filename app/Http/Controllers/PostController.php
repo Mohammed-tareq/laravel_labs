@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
@@ -13,11 +16,8 @@ class PostController extends Controller
 
     public function index()
     {
-
-        $post = Post::with('user')->get();
-            return view('index', compact('post'));
-
-
+        $posts = Post::with('user')->orderBy('id', 'desc')->paginate(10);
+        return view('index', compact('posts'));
     }
 
     /**
@@ -25,7 +25,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('create');
+        $users = User::all();
+        return view('create', compact('users'));
     }
 
     /**
@@ -34,6 +35,10 @@ class PostController extends Controller
     public function store(Request $request)
     {
 
+        Post::create($request->all());
+
+        Session::flash('success', 'Post created successfully.');
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -41,15 +46,17 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-
+        $post = Post::findOrFail($id);
+        return view('show', compact('post'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id )
+    public function edit(string $id)
     {
-
+        $post = Post::findOrFail($id);
+        return view('edit', compact('post',));
     }
 
     /**
@@ -57,17 +64,21 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
+        $post = Post::findOrFail($id);
+        $post->update($request->all());
+        Session::flash('success', 'Post updated successfully.');
+        return redirect()->route('posts.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
 
-        public function destroy(string $id)
+    public function destroy(string $id)
     {
-
-
+        $post = Post::findOrFail($id);
+        $post->delete();
+        Session::flash('success', 'Post deleted successfully.');
+        return redirect()->route('posts.index');
     }
-
 }
