@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
@@ -51,7 +51,6 @@ class PostController extends Controller
         $limitPost = Post::with('user')->findOrFail($id);
         $comments = $limitPost->comments()->with('user')->latest()->limit(3)->get();
         $users = User::all();
-        // return $comments;
 
         return view('show', compact('limitPost', 'users' , 'comments'));
     }
@@ -100,7 +99,11 @@ class PostController extends Controller
     public function deleteForever($id)
     {
         $post = Post::onlyTrashed()->findOrFail($id);
+
+        Comment::where("commentable_id", $post->id)->forceDelete();
         $post->forceDelete();
+
+
         Session::flash('success', 'Post deleted successfully.');
         return redirect()->route('posts.deleted');
     }

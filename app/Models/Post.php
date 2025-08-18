@@ -26,7 +26,7 @@ class Post extends Model
         return $this->belongsTo(User::class , 'user_id');
     }
 
-    public function commentable()
+    public function comments()
     {
         return $this->morphMany(Comment::class , 'commentable');
     }
@@ -40,8 +40,8 @@ class Post extends Model
     }
 
 
-    protected function getCreatedAtAttribute($value)
-    {
-        return Carbon::parse($value)->diffForHumans();
-    }
+    // protected function getCreatedAtAttribute($value)
+    // {
+    //     return Carbon::parse($value)->diffForHumans();
+    // }
 }

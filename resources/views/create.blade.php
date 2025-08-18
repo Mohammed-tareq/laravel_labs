@@ -13,19 +13,21 @@
                     <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
                     <input type="text" id="title" name="title" placeholder="Enter post title"
                            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"/>
-                </div>
-                <div>
-                    <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
-                    <input type="text" id="title" name="title2" placeholder="Enter post title"
-                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"/>
-                </div>
+                    @error('title')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                    @enderror
+                        </div>
+
 
                 <!-- Description -->
                 <div>
                     <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
                     <textarea id="description" name="description" rows="4" placeholder="Write the post content..."
                               class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"></textarea>
-                </div>
+                              @error('description')
+                              <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                              @enderror
+                            </div>
 
                 <div>
                     <label for="creator" class="block text-sm font-medium text-gray-700 mb-1">Post Creator</label>

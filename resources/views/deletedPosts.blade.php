@@ -27,8 +27,6 @@
                     <td class="px-6 py-4">{{$post->created_at->diffForHumans()}}</td>
                     <td class="px-6 py-4 text-right space-x-2">
                         <div class="flex items-center space-x-2">
-                            <a href="{{ route('posts.show', $post->id) }}" class="px-3 py-1 text-sm bg-green-100 text-green-700 rounded hover:bg-green-200">View</a>
-                            <a href="{{ route('posts.edit', $post->id) }}" class="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded hover:bg-blue-200">Edit</a>
                             <a href="{{ route('posts.delete', $post->id) }}"class="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200">Delete For Ever</a>
                             <a href="{{ route('posts.restore', $post->id) }}"class="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200">Restore</a>
 
